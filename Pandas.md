@@ -4,8 +4,20 @@
 
 #### introduction and motivation
 Pandas is a package for organizing data that has different types (strings, Boolean, integers, floats, etc.) into one neat interface. It has a lot of built-in functions to clean, summarise, and manipulate data to develop an exploratory understanding of a given dataset.
+Use example where necessary, as this enhances the learning.
 
+* Intro & Motivation: Why Pandas? Pandas based on Numpy
+* How to read data from various sources (database, web, csv, etc.)
+* Summarizing data from Pandas
+* Cleaning data in Pandas
+
+## Intro & Motivation
+TBD
+
+## Pandas basics
 ## series
+
+
 ####  a 1d array-like object
 
      from pandas import Series, DataFrame
@@ -95,5 +107,79 @@ So the height of the woman wearing jersey number 11 is 177:
 
 
 ## dataframe
+a table or spreadsheet like structure. 
+
+make | mpg | cylinders | HP | 0-60
+---- | :---: | :---: | :---: | :---: | :---: |
+Fiat | 38 | 4 | 157   | 6.9
+Ford F150 | 19 | 6 | 386 | 6.3 |
+Mazda 3 | 37 | 4 | 155 |  7.5 |
+Ford Escape | 27 | 4 | 245 | 7.1 |
+Kia Soul | 31 | 4 | 164 | 8.5 | 
+
+a common way to create a dataframe is to use a python dictionary as follows:
+
+     cars = {'make': ['Fiat 500', 'Ford F-150', 'Mazda 3', 'Ford Escape', 'Kia Soul'],
+        'mpg': [38, 19, 37, 27, 31],
+        'cylinders': [4, 6, 4, 4, 4],
+        'HP': [157, 386, 155, 245, 164],
+        '0-60': [6.9, 6.3, 7.5, 7.1, 8.5]}
+
+     df = DataFrame(cars)
+     df
+     
+     0-60 | HP | cylinders | make | mpg
+     ------+-----+------------+-----------+------
+     6.9  | 157 |      4       | Fiat 500 | 38
+
+
+The columns are displayed in sorted order. If we want to specify a column order we can do so:
+
+     df2 = DataFrame(cars, columns=['make', 'mpg', 'cylinders', 'HP', '0-60' ])
+
+
+We can also create a DataFrame from a set of Series objects:
+
+     cars2 = {'make': Series(['Fiat 500', 'Ford F-150', 'Mazda 3', 'Ford Escape', 'Kia Soul']),
+        'mpg': Series([38, 19, 37, 27, 31]),
+        'cylinders': Series([4, 6, 4, 4, 4]),
+        'HP': [157, 386, 155, 245, 164],
+        '0-60': Series([6.9, 6.3, 7.5, 7.1, 8.5])}
+        
+     df2 = DataFrame(cars2)
+
+## reading data from different sources.
+### csv file:
+we can create a dataframe from a CSV file (comma separated values).
+
+For example, a CSV file representing the car table above would be:
+
+	make,mpg,cylinders,HP,0-60
+	Fiat,38,4,157,6.9
+	Ford F-150,19,6,386,6.3
+	Mazda 3,37,4,155,7.5
+	Ford Escape,27,4,245,7.1
+	Kia Soul,31,4,164,8.5
+
+In my case, I named the file `mpg.csv` and saved the file in my home directory `/Users/raz/` and I can make a dataframe out of this file by:
+
+     df3 = pd.read_csv('/Users/raz/mpg.csv')
+
+Sometimes csv files don't have column names. For example, we could have a CSV file that looks like:
+
+	Fiat,38,4,157,6.9
+	Ford F-150,19,6,386,6.3
+	Mazda 3,37,4,155,7.5
+	Ford Escape,27,4,245,7.1
+
+In this case we can specify the column names when we create the dataframe:
+
+	df4 = pd.read_csv('/Users/raz/mpg2.csv', names = ['make', 'mpg', 'cylinders', 'hp', '0-60'])
+
+
+
+## accessing data
+by columns
+
 
 
