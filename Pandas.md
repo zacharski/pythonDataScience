@@ -199,6 +199,7 @@ When we read that data in
 	df4 = pd.read_csv('/Users/raz/mpg2.csv', names = ['make', 'mpg', 'cylinders', 'hp', '0-60'])
 	
 and look at the results:
+
 make | mpg | cylinders | HP | 0-60
 ---- | :---: | :---: | :---: | :---: | :---: |
 Fiat | 38 | 4 | 157   | 6.9
