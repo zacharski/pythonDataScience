@@ -176,6 +176,38 @@ In this case we can specify the column names when we create the dataframe:
 
 	df4 = pd.read_csv('/Users/raz/mpg2.csv', names = ['make', 'mpg', 'cylinders', 'hp', '0-60'])
 
+### reading csv file from url
+You can also read in CSV data directly from a URL:
+
+	df5 = pd.read_csv( 'https://archive.ics.uci.edu/ml/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data', names = ['timesPregnant', 'glucose', 'bloodPressure', 'skinFold', 'insulin', 'bmi', 'pedigree', 'diabetes'])
+
+
+There are many other ways of reading in data including from SQL databases, mongoDB, andwebpages. See the Pandas documentation for details.
+
+### missing values
+
+Let's say our data contains some missing values. For example, in our car dataset suppose we don't know how many cylinders a Ford F-150 has. In the CSV file we would represent that as
+
+	Fiat,38,4,157,6.9
+	Ford F-150,19,,386,6.3
+	Mazda 3,37,4,155,7.5
+	Ford Escape,27,4,245,7.1
+	Kia Soul,31,4,164,8.5
+
+When we read that data in 
+
+	df4 = pd.read_csv('/Users/raz/mpg2.csv', names = ['make', 'mpg', 'cylinders', 'hp', '0-60'])
+	
+and look at the results:
+make | mpg | cylinders | HP | 0-60
+---- | :---: | :---: | :---: | :---: | :---: |
+Fiat | 38 | 4 | 157   | 6.9
+Ford F150 | 19 | NaN | 386 | 6.3 |
+Mazda 3 | 37 | 4 | 155 |  7.5 |
+Ford Escape | 27 | 4 | 245 | 7.1 |
+Kia Soul | 31 | 4 | 164 | 8.5 | 
+
+we see that Pandas indicates a missing value with NaN (not a number)
 
 
 ## accessing data
