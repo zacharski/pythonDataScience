@@ -179,7 +179,7 @@ In this case we can specify the column names when we create the dataframe:
 ### reading csv file from url
 You can also read in CSV data directly from a URL:
 
-	df5 = pd.read_csv( 'https://archive.ics.uci.edu/ml/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data', names = ['timesPregnant', 'glucose', 'bloodPressure', 'skinFold', 'insulin', 'bmi', 'pedigree', 'diabetes'])
+	df5 = pd.read_csv( 'https://archive.ics.uci.edu/ml/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data', names = ['timesPregnant', 'glucose', 'bloodPressure', 'skinFold', 'insulin', 'bmi', 'pedigree', 'age', 'diabetes'])
 
 
 There are many other ways of reading in data including from SQL databases, mongoDB, andwebpages. See the Pandas documentation for details.
@@ -210,9 +210,82 @@ Kia Soul | 31 | 4 | 164 | 8.5 |
 
 we see that Pandas indicates a missing value with NaN (not a number)
 
+## should I cover reindexing?
 
 ## accessing data
 by columns
+Back to the diabetes dataframe
+
+     df5['glucose']
+    0      148
+	1       85
+	2      183
+	3       89
+	4      137
+	5      116
+	6       78
+	7      115
+	8      197
 
 
 
+I can get multiple columns of a dataframe by passing in a list:
+
+     df5[['age','bmi']]
+     	age	bmi
+	0	50	33.6
+	1	31	26.6
+	2	32	23.3
+	3	21	28.1
+	4	33	43.1
+	5	30	25.6
+	6	26	31.0
+	7	29	35.3
+	8	53	30.1
+	
+To get a row we can use the `loc` function
+
+    df5.loc[3]
+    timesPregnant     1.000
+	glucose          89.000
+	bloodPressure    66.000
+	skinFold         23.000
+	insulin          94.000	
+	bmi              28.100
+	pedigree          0.167
+	age              21.000
+	diabetes          0.000
+	Name: 3, dtype: float64	
+	
+We can also get rows that match a specific criterion. For example. 
+
+     df5.loc[df5['age'] < 23 ]
+     
+	timesPregnant	glucose	bloodPressure	skinFold	insulin	bmi	pedigree	age	diabetes
+		3	1	89	66	23	94	28.1	0.167	21	0
+	27	1	97	66	15	140	23.2	0.487	22	0
+	32	3	88	58	11	54	24.8	0.267	22	0
+	
+	47	2	71	70	27	0	28.0	0.586	22	0
+	
+## simple operations on dataframes
+
+## first. Let's use a new dataframe that just has x and y coordinates
+
+     xy = {'x': Series([2, 4, 6, 8], index=['a', 'b', 'c', 'd']),
+      'y': Series([3, 5, 7, 9], index=['a', 'b', 'c', 'd'])
+        }
+	xyDF = DataFrame(xy)
+	xyDF
+		x	y
+	a	2	3
+	b	4	5
+	c	6	7
+	d	8	9
+	
+So we can use numpy to get the mean:
+
+     xyDF.apply(numpy.mean)
+     x    5.0
+	y    6.0
+	dtype: float64
